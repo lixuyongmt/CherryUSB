@@ -1,7 +1,7 @@
-usbd_cdc_acm
-===============
+CDC ACM Device
+=================
 
-本 demo 主要用于演示 cdc acm 功能，包含收发测试，DTR 控制，ZLP 测试，性能测试。
+本 demo 主要用于演示 cdc acm 功能，参考 `demo/cdc_acm_template.c` 模板。包含收发测试，DTR 控制，ZLP 测试，性能测试。
 
 - 开辟读写 buffer，用于收发数据，并且buffer需要用 nocache 修饰，这里我们读写都是用 2048字节，是为了后面的 ZLP 测试和性能测试使用。
 
@@ -98,7 +98,5 @@ usbd_cdc_acm
     }
 
 - 上述我们需要注意，长度设置为 2048 是为了测试 ZLP 功能，通常实际使用时，接收长度应该使用 CDC_MAX_MPS 。具体原因参考 :ref:`usb_ext`
-- 如果需要做性能测试，使用 tools/test_srcipts/test_cdc_speed.py 进行测试,并在测试之前删除 `usbd_cdc_acm_bulk_out` 和 `usbd_cdc_acm_bulk_in` 中的打印，否则会影响测试结果。
 
-
-此外，对于 CDC ACM 搭配 OS 的情况，通常我们 read 使用异步并将数据存储到 ringbuffer 中，write 使用同步搭配 sem 使用。
+.. note:: 对于 CDC ACM 搭配 OS 的情况，通常我们 read 使用异步并将数据存储到 ringbuffer 中，write 使用同步搭配 sem 使用。
